@@ -11,6 +11,7 @@ El objetivo principal es consolidar los fundamentos teóricos de la arquitectura
 ---
 
 ## 📑 Tabla de Contenidos
+
 1. [🎯 Propósito del Repositorio](#-propósito-del-repositorio)
 2. [🏗️ Arquitectura Objetivo](#-arquitectura-objetivo-del-proyecto)
 3. [🗺️ Ruta de Aprendizaje e Hitos de Estudio](#-ruta-de-aprendizaje-e-hitos-de-estudio)
@@ -31,6 +32,29 @@ A diferencia de un aprendizaje puramente teórico, este repositorio funge como u
 
 El destino final de los componentes desarrollados en este roadmap sigue un flujo distribuido y nativo de la nube.
 
+```mermaid
+graph TD
+    Client([Cliente / API Gateway]) -->|REST / GraphQL| API_Laravel(Monolito Modulado Laravel)
+    Client -->|gRPC / REST| MS_Go(Microservicio Go)
+
+    API_Laravel -.->|Publica Eventos| Kafka[Message Broker / Kafka / RabbitMQ]
+    MS_Go -.->|Consume Eventos| Kafka
+
+    API_Laravel --> DB_Relacional[(PostgreSQL / MySQL)]
+    MS_Go --> DB_NoSQL[(MongoDB)]
+
+    API_Laravel --> Redis[(Caché Redis)]
+    MS_Go --> Redis
+
+    subgraph Kubernetes Cluster [Infraestructura K8s / GCP]
+        API_Laravel
+        MS_Go
+        Kafka
+        Redis
+    end
+
+    Telemetry((OpenTelemetry / Jaeger)) -.- Kubernetes Cluster
+
 🗺️ Ruta de Aprendizaje e Hitos de Estudio
 Sigue mi progreso a través de los diferentes módulos del roadmap marcando las casillas conforme se completen las implementaciones:
 
@@ -43,9 +67,9 @@ Enfoque: Estructurar el código de un solo componente para que sea mantenible, d
 
 [ ] 1.3 Domain-Driven Design (DDD):
 
-Estratégico: Bounded Contexts y Ubiquitous Language.
+    - Estratégico: Bounded Contexts y Ubiquitous Language.
 
-Táctico: Entities, Value Objects, Aggregates, Repositories y Domain Services.
+    - Táctico: Entities, Value Objects, Aggregates, Repositories y Domain Services.
 
 [ ] 1.4 Patrones Locales: Aplicación de CQRS (Command Query Responsibility Segregation) a nivel de código.
 
@@ -71,9 +95,9 @@ Enfoque: Romper el monolito. Diseñar interconexiones eficientes, tolerantes a f
 
 [ ] 3.3 Event-Driven Architecture (EDA):
 
-Queues (RabbitMQ) vs. Event Streams (Kafka).
+    - Queues (RabbitMQ) vs. Event Streams (Kafka).
 
-Patrones de mensajería, garantías de entrega (At-least-once) y el patrón Transactional Outbox.
+    - Patrones de mensajería, garantías de entrega (At-least-once) y el patrón Transactional Outbox.
 
 🚀 Entregable Práctico: Directorio ../src/modulo-3-distribuidos — Separación en microservicios comunicados por gRPC y publicación de eventos asíncronos vía Message Broker.
 
@@ -95,11 +119,11 @@ Enfoque: Diseñar asumiendo que todo va a fallar. Crear sistemas auto-recuperabl
 
 [ ] 5.2 Observabilidad: Los tres pilares.
 
-Métricas con Prometheus/Grafana.
+    - Métricas con Prometheus/Grafana.
 
-Logs estructurados.
+    - Logs estructurados.
 
-Trazabilidad Distribuida con OpenTelemetry/Jaeger.
+    - Trazabilidad Distribuida con OpenTelemetry/Jaeger.
 
 [ ] 5.3 Seguridad Arquitectónica: Autenticación descentralizada con JWT/OAuth2 y gestión centralizada de secretos.
 
