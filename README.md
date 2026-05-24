@@ -32,29 +32,6 @@ A diferencia de un aprendizaje puramente teórico, este repositorio funge como u
 
 El destino final de los componentes desarrollados en este roadmap sigue un flujo distribuido y nativo de la nube.
 
-```mermaid
-graph TD
-    Client([Cliente / API Gateway]) -->|REST / GraphQL| API_Laravel(Monolito Modulado Laravel)
-    Client -->|gRPC / REST| MS_Go(Microservicio Go)
-
-    API_Laravel -.->|Publica Eventos| Kafka[Message Broker / Kafka / RabbitMQ]
-    MS_Go -.->|Consume Eventos| Kafka
-
-    API_Laravel --> DB_Relacional[(PostgreSQL / MySQL)]
-    MS_Go --> DB_NoSQL[(MongoDB)]
-
-    API_Laravel --> Redis[(Caché Redis)]
-    MS_Go --> Redis
-
-    subgraph Kubernetes Cluster [Infraestructura K8s / GCP]
-        API_Laravel
-        MS_Go
-        Kafka
-        Redis
-    end
-
-    Telemetry((OpenTelemetry / Jaeger)) -.- Kubernetes Cluster
-
 🗺️ Ruta de Aprendizaje e Hitos de Estudio
 Sigue mi progreso a través de los diferentes módulos del roadmap marcando las casillas conforme se completen las implementaciones:
 
