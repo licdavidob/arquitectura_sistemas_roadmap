@@ -17,20 +17,7 @@ A diferencia de un aprendizaje puramente teórico, este repositorio funge como u
 ### 🏗️ Arquitectura Objetivo del Proyecto
 El destino final de los componentes desarrollados en este roadmap sigue el siguiente flujo distribuido:
 
-[ Cliente ] ──► [ Ingress / API Gateway ]
-                       │
-         ┌─────────────┴─────────────┐ (gRPC Síncrono)
-         ▼                           ▼
-  [ Servicio A ]               [ Servicio B ]
-  (Clean Arch + DDD)           (Clean Arch + DDD)
-         │                           │
-         ▼ (Eventos Pub/Sub)         ▼
-   [ RabbitMQ / Kafka ] ─────────────┘
-         │
-         ▼ (Cache-Aside)
-  [ Redis ] ──► [ MongoDB / SQL ]
-
-  🗺️ Ruta de Aprendizaje e Hitos de Estudio
+🗺️ Ruta de Aprendizaje e Hitos de Estudio
 Sigue mi progreso a través de los diferentes módulos del roadmap:
 
 📦 Módulo 1: Diseño de Software y Arquitectura de Aplicaciones
